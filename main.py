@@ -10,7 +10,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
-API_KEY = "4a43fe9ece2d7ffde2979dd65efe763a"
+API_KEY = "REMOVED_SECRET"
 
 search_history = []
 
