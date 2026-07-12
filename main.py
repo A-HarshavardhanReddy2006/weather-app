@@ -3,15 +3,16 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 import requests
+import os
+from dotenv import load_dotenv
 
 app = FastAPI()
-
+load_dotenv()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
-API_KEY = "REMOVED_SECRET"
-
+API_KEY = os.getenv("API_KEY")
 search_history = []
 
 
