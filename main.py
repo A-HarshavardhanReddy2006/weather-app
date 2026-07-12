@@ -7,12 +7,15 @@ import os
 from dotenv import load_dotenv
 
 app = FastAPI()
+
 load_dotenv()
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
 API_KEY = os.getenv("API_KEY")
+
 search_history = []
 
 
@@ -39,16 +42,47 @@ async def get_weather(request: Request, city: str = Form(...)):
 
     search_history[:] = search_history[-5:]
 
-    url = (
-        f"https://api.openweathermap.org/data/2.5/weather"
-        f"?q={city}&appid={API_KEY}&units=metric"
-    )
+
+    if not API_KEY:
+        weather = {
+            "city": None,
+            "error": "API key is missing. Check environment variables."
+        }
+
+        return templates.TemplateResponse(
+            "index.html",
+            {
+                "request": request,
+                "weather": weather,
+                "history": search_history
+            }
+        )
+
+
+    url = "https://api.openweathermap.org/data/2.5/weather"
+
+    params = {
+        "q": city,
+        "appid": API_KEY,
+        "units": "metric"
+    }
+
 
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(
+            url,
+            params=params,
+            timeout=10
+        )
+
         data = response.json()
 
-    except Exception:
+        print("STATUS:", response.status_code, flush=True)
+        print("DATA:", data, flush=True)
+
+    except Exception as e:
+
+        print("ERROR:", e)
 
         weather = {
             "city": None,
@@ -64,11 +98,15 @@ async def get_weather(request: Request, city: str = Form(...)):
             }
         )
 
+
     if response.status_code != 200:
 
         weather = {
             "city": None,
-            "error": "Wrong spelling! Please check city name."
+            "error": data.get(
+                "message",
+                "Unable to fetch weather data"
+            ).title()
         }
 
         return templates.TemplateResponse(
@@ -80,29 +118,52 @@ async def get_weather(request: Request, city: str = Form(...)):
             }
         )
 
+
     main_weather = data["weather"][0]["main"]
+
 
     if main_weather == "Rain":
         mood = "Carry an umbrella ☔"
+
     elif main_weather == "Clear":
         mood = "Bright sunny day ☀️"
+
     elif main_weather == "Clouds":
         mood = "Cloudy atmosphere ☁️"
+
     elif main_weather == "Snow":
         mood = "Snowfall weather ❄️"
+
     else:
         mood = "Enjoy the weather 🌤️"
 
+
     weather = {
+
         "city": city,
-        "temperature": round(data["main"]["temp"], 1),
-        "feels_like": round(data["main"]["feels_like"], 1),
-        "humidity": data["main"]["humidity"],
-        "wind": data["wind"]["speed"],
-        "description": data["weather"][0]["description"].title(),
-        "icon": data["weather"][0]["icon"],
-        "mood": mood
+
+        "temperature":
+            round(data["main"]["temp"], 1),
+
+        "feels_like":
+            round(data["main"]["feels_like"], 1),
+
+        "humidity":
+            data["main"]["humidity"],
+
+        "wind":
+            data["wind"]["speed"],
+
+        "description":
+            data["weather"][0]["description"].title(),
+
+        "icon":
+            data["weather"][0]["icon"],
+
+        "mood":
+            mood
     }
+
 
     return templates.TemplateResponse(
         "index.html",
