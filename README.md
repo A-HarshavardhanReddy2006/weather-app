@@ -1,30 +1,79 @@
 # 🌦️ Weather App
 
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
+![Deployment](https://img.shields.io/badge/Deployment-Render-purple)
+
 A modern weather web application built using **FastAPI**, **HTML**, **CSS**, and the **OpenWeatherMap API**.
 
-## 🚀 Features
+This application allows users to search weather information for any city and displays real-time weather details through a clean, responsive, and user-friendly interface.
 
-- 🌍 Search weather by city name
-- 🌡️ Real-time temperature
-- 🤗 Feels-like temperature
-- 💧 Humidity
-- 🌬️ Wind speed
-- ☁️ Weather description
-- 😊 Weather mood suggestion
-- 🕒 Recent search history
-- ❌ Error handling for invalid city names
-- 📱 Responsive user interface
+---
 
-## 🛠️ Technologies Used
+# 🚀 Live Demo
 
-- Python
-- FastAPI
-- HTML5
-- CSS3
-- Jinja2 Templates
-- OpenWeatherMap API
-- Requests
-- Python-dotenv
+🔗 [Weather App Live](https://weather-app-qa0a.onrender.com)
+
+🔗 [GitHub Repository](https://github.com/A-HarshavardhanReddy2006/weather-app)
+
+---
+
+# ✨ Features
+
+* 🌍 Search weather by city name
+* 🌡️ Real-time temperature information
+* 🤗 Feels-like temperature
+* 💧 Humidity details
+* 🌬️ Wind speed information
+* ☁️ Weather description
+* 🌤️ Weather mood suggestion
+* 🕒 Recent search history (last 5 searches)
+* ❌ Invalid city name error handling
+* 📱 Responsive user interface
+* 🔐 Secure API key management using environment variables
+
+---
+
+# 🔄 Application Flow
+
+```
+User enters city name
+          ↓
+FastAPI receives request
+          ↓
+Request sent to OpenWeatherMap API
+          ↓
+Weather data processed
+          ↓
+Jinja2 renders dynamic webpage
+          ↓
+Weather information displayed to user
+```
+
+---
+
+# 🛠️ Technologies Used
+
+## Backend
+
+* Python
+* FastAPI
+* Requests Library
+* Python-dotenv
+
+## Frontend
+
+* HTML5
+* CSS3
+* Jinja2 Templates
+
+## API
+
+* OpenWeatherMap API
+
+## Deployment
+
+* Render
 
 ---
 
@@ -57,7 +106,7 @@ A modern weather web application built using **FastAPI**, **HTML**, **CSS**, and
 # 📂 Project Structure
 
 ```text
-weather_project/
+weather-app/
 │
 ├── screenshots/
 │   ├── home.jpeg
@@ -75,42 +124,46 @@ weather_project/
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
-└── .env (ignored)
+
 ```
 
-# ⚙️ Installation
+---
 
-Clone the repository:
+# ⚙️ Installation and Setup
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/A-HarshavardhanReddy2006/weather-app.git
 ```
 
-Move into the project:
+## Navigate to Project
 
 ```bash
 cd weather-app
 ```
 
-Create a virtual environment:
+## Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate the virtual environment:
+## Activate Environment
 
-**Windows**
+### Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-Install the required packages:
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
+
+## Configure Environment Variables
 
 Create a `.env` file:
 
@@ -118,13 +171,13 @@ Create a `.env` file:
 API_KEY=YOUR_OPENWEATHER_API_KEY
 ```
 
-Run the application:
+## Run Application
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Open your browser:
+Open:
 
 ```
 http://127.0.0.1:8000
@@ -132,20 +185,53 @@ http://127.0.0.1:8000
 
 ---
 
+# 🔐 Security
+
+* API keys are stored using environment variables
+* `.env` file is excluded using `.gitignore`
+* Sensitive information is not stored in source code
+
+---
+
 # 📚 What I Learned
 
-- FastAPI fundamentals
-- Routing and form handling
-- Jinja2 templates
-- Working with REST APIs
-- Environment variables using `.env`
-- Git and GitHub
-- Responsive UI development
+* Building web applications using FastAPI
+* Creating API integrations
+* Handling HTTP requests
+* Jinja2 template rendering
+* Environment variable management
+* Secure credential handling
+* Git and GitHub workflow
+* Responsive frontend development
+* Cloud deployment using Render
+
+---
+
+# 🚀 Future Improvements
+
+* 🔑 User authentication system
+* 🗄️ Database integration for weather history
+* 🌦️ 5-day weather forecast
+* 📍 Location-based weather detection
+* 📊 Weather analytics and charts
+* 🐳 Docker containerization
+* ⚡ CI/CD deployment pipeline
+* 🎨 Advanced UI improvements
 
 ---
 
 # 👨‍💻 Author
 
-**Appi Reddigari Harshavardhan Reddy**
+**Harshavardhan Reddy Appi Reddigari**
 
-GitHub: **https://github.com/A-HarshavardhanReddy2006**
+🎓 B.Tech Computer Science Engineering Student
+
+### GitHub
+
+[GitHub Profile](https://github.com/A-HarshavardhanReddy2006)
+
+### LinkedIn
+
+[LinkedIn Profile](https://www.linkedin.com/in/harshavardhan-reddy-appi-reddigari-64b305307/)
+
+⭐ If you find this project useful, consider giving it a star!
